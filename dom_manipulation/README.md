@@ -1,0 +1,1 @@
+This is the readme file for dom manipulation and this directory contains the solutions of all tasks.
