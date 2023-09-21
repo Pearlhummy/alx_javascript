@@ -1,44 +1,35 @@
 #!/usr/bin/node
+// create a class with its constructor
 class Rectangle {
   constructor(w, h) {
-      if (w <= 0 || h <= 0 || !Number.isInteger(w) || !Number.isInteger(h)) {
-          // Create an empty object if width or height is invalid
-          this.width = 0;
-          this.height = 0;
-      } else {
-          this.width = w;
-          this.height = h;
-      }
+    if (w > 0 && h > 0) {
+      this.width = w;
+      this.height = h;
+    }
   }
-
+  //created a print() method using a nested loop to iterate over the rows & columns of the rectangle.
+  //adding an 'X' character.
   print() {
-      if (this.width === 0 || this.height === 0) {
-          console.log("Empty Rectangle");
-      } else {
-          for (let i = 0; i < this.height; i++) {
-              console.log('X'.repeat(this.width));
-          }
+    for (let i = 0; i < this.height; i++) {
+      let row = "";
+      for (let j = 0; j < this.width; j++) {
+        row += "X";
       }
+      console.log(row);
+    }
   }
 
+  //Exchanging the width and the height
   rotate() {
-      // Exchange the width and height
-      const temp = this.width;
-      this.width = this.height;
-      this.height = temp;
+    [this.width, this.height] = [this.height, this.width];
   }
 
+  //Double the width & height by 2
   double() {
-      // Double the width and height
-      this.width *= 2;
-      this.height *= 2;
+    this.width *= 2;
+    this.height *= 2;
   }
 }
 
-// Example usage:
-const myRectangle = new Rectangle(5, 4); // Create a rectangle with width 5 and height 4
-myRectangle.print(); // Print the rectangle
-myRectangle.rotate(); // Rotate the rectangle
-myRectangle.print(); // Print the rotated rectangle
-myRectangle.double(); // Double the dimensions
-myRectangle.print(); // Print the doubled rectangle
+// create a module for exports
+module.exports = Rectangle;

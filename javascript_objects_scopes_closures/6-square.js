@@ -1,65 +1,38 @@
-#!/usr/bin/node
-class Rectangle {
-  constructor(w, h) {
-      if (w <= 0 || h <= 0 || !Number.isInteger(w) || !Number.isInteger(h)) {
-          // Create an empty object if width or height is invalid
-          this.width = 0;
-          this.height = 0;
-      } else {
-          this.width = w;
-          this.height = h;
-      }
-  }
+// create a class Square that inherits from Square in 5-square.js
+//imported Square from "5-square.js"
+const newSquare = require("./5-square");
 
-  print() {
-      if (this.width === 0 || this.height === 0) {
-          console.log("Empty Rectangle");
-      } else {
-          for (let i = 0; i < this.height; i++) {
-              console.log('X'.repeat(this.width));
-          }
-      }
-  }
-
-  rotate() {
-      // Exchange the width and height
-      const temp = this.width;
-      this.width = this.height;
-      this.height = temp;
-  }
-
-  double() {
-      // Double the width and height
-      this.width *= 2;
-      this.height *= 2;
-  }
-}
-
-class Square extends Rectangle {
+class Square extends newSquare {
   constructor(size) {
-      // Call the constructor of Rectangle with the same size for width and height
-      super(size, size);
+    super(size, size);
   }
 
+  //created a print() method using a nested loop to iterate over the rows & columns of the rectangle.
+  //adding an 'X' character.
+  print() {
+    for (let i = 0; i < this.height; i++) {
+      let row = "";
+      for (let j = 0; j < this.width; j++) {
+        row += "X";
+      }
+      console.log(row);
+    }
+  }
+
+  //this will print the 'c' character
   charPrint(c) {
-      if (!c) {
-          c = 'X'; // Default character
+    if (c === undefined) {
+      c = "X"; // default to 'X' if c is undefined
+    }
+    for (let i = 0; i < this.height; i++) {
+      let row = "";
+      for (let j = 0; j < this.width; j++) {
+        row += `${c}`;
       }
-      if (this.width === 0 || this.height === 0) {
-          console.log("Empty Square");
-      } else {
-          for (let i = 0; i < this.height; i++) {
-              console.log(c.repeat(this.width));
-          }
-      }
+      console.log(row);
+    }
   }
 }
 
-// Example usage:
-const mySquare = new Square(5); // Create a square with size 5
-mySquare.print(); // Print the square
-mySquare.rotate(); // Rotate the square
-mySquare.print(); // Print the rotated square
-mySquare.double(); // Double the dimensions
-mySquare.print(); // Print the doubled square
-mySquare.charPrint('*'); // Print the square using '*' character
+// create a module for export
+module.exports = Square;
